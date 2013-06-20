@@ -1,0 +1,70 @@
+﻿<style>
+ 
+</style>
+
+<script>
+    var campaignGrid;
+
+    function campaignGridOnError(e) { 
+        campaignGrid.cancelChanges();
+        logGridError(e);
+    }
+</script>
+
+<div id="ContentGridBox">
+@(Html.Kendo().Grid<Splintered_Universe.Models.VM.CampaignVM>()
+    .Name("campaignGrid")
+    .Columns(columns =>
+    {
+        columns.Command(c =>
+        {
+                c.Edit();
+                c.Destroy();
+        }).Width(60);
+        columns.Bound(p => p.CampaignId).Title("Id").Hidden(true);
+        columns.Bound(p => p.Name).Title("Name").Width(200);
+        columns.Bound(p => p.Description).Title("Description").Width(300);
+        columns.Bound(p => p.GameMaster).Title("Game Master").Width(125);
+        columns.Bound(p => p.StartDate).Title("Start Date").Width(100);
+        columns.Bound(p => p.System).Title("System Rules").Width(150);
+    })
+    .DataSource(dataSource => dataSource
+        .Ajax() 
+        .ServerOperation(false)
+        .Model( m => {
+            m.Id(p => p.CampaignId);
+            m.Field(f => f.CampaignId).Editable(false);
+        })
+        .Events( events => events.Error("campaignGridOnError"))
+        .Read(read => read.Action("Read", "Campaign"))
+        .Create( create => create.Action("Create", "Campaign"))
+        .Update( update => update.Action("Update", "Campaign"))
+        .Destroy( destroy => destroy.Action("Destroy", "Campaign"))
+        .Sort( s => s.Add(sc => sc.Name).Ascending())
+        .PageSize(15)
+    )
+    .Editable( settings => settings.Mode(GridEditMode.PopUp)
+        .DisplayDeleteConfirmation(true)
+        //.TemplateName("UsersEdit")
+        .Window( window => window.Visible(true).Title("Add / Edit Campaign").Width(420).Actions(a => a.Clear()))
+    )
+    .ToolBar(t => {
+            t.Create().Text("");
+    })
+    .Selectable( s => s.Enabled(true))
+    .Pageable( p => p.Refresh(true).PageSizes(true).PageSizes(new int[] {15,25,50}))
+    .Sortable( s => s.SortMode( GridSortMode.SingleColumn))
+    .Filterable(filterable => filterable.Enabled(false))
+    .ColumnMenu(colMenu => colMenu.Enabled(false))
+    .Reorderable( reordering => reordering.Columns(false))
+    .Resizable( r => r.Columns(true))
+    .Scrollable(s => s.Height(400))
+)
+</div>
+
+<script>
+    $(function () {
+        // Notice that the Name() of the tabstrip is used to get its client-side instance
+        campaignGrid = $("#campaignGrid").data("kendoGrid");
+    });
+</script>

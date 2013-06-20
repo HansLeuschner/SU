@@ -1,0 +1,167 @@
+﻿<#@ template language="C#" HostSpecific="True"  inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="EnvDTE" #>
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+
+using Kendo.Mvc.UI;
+using Kendo.Mvc.Extensions;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Net;
+
+using System.Net.Http;
+using <#= Model.ModelTypeNamespace #>.Models;
+using <#= Model.ModelTypeNamespace #>.Models.VM;
+
+<# if(!string.IsNullOrEmpty(Model.ModelTypeNamespace)) { #>
+using <#= Model.ModelTypeNamespace #>;
+<# } #>
+<# if(Model.DbContextNamespace != Model.ModelTypeNamespace) { #>
+using <#= Model.DbContextNamespace #>;
+<# } #>
+
+namespace <#= Model.ControllerNamespace #>
+{   
+<#  
+    var modelType = (CodeType)Model.ModelType; 
+    var modelName = modelType.Name; 
+    var modelNamePlural = Model.ModelTypePluralized; 
+    var modelVariable = modelName.ToLower(); 
+    var relatedEntities = ((IEnumerable)Model.RelatedEntities).OfType<RelatedEntityInfo>();
+    var primaryKeyProperty = modelType.VisibleMembers().OfType<CodeProperty>().Single(x => x.Name == Model.PrimaryKey); 
+    var routingName = Regex.Replace(Model.ControllerName, "Controller$", "", RegexOptions.IgnoreCase);
+    var isObjectContext = ((CodeType)Model.DbContextType).IsAssignableTo<System.Data.Objects.ObjectContext>();
+#>
+    public class <#= Model.ControllerName #> : Controller
+    {
+        private <#= ((CodeType)Model.DbContextType).Name #> db = new <#= ((CodeType)Model.DbContextType).Name #>();
+
+		// SpringGage
+        public JsonResult <#= modelNamePlural#>Listing([DataSourceRequest]DataSourceRequest request, bool AddDefault = false)
+		{
+		    IQueryable<<#= modelName#>> tObj = null;
+            tObj = db.<#= modelNamePlural#>.OrderBy(o => o.Name);
+            List<<#= modelName#>VM> resultList = new List<<#= modelName#>VM>();
+            <#= modelName#>VM firstItem = new <#= modelName#>VM();
+            if (AddDefault)
+            {
+                firstItem.<#= modelName#>Id = -1;
+                firstItem.Name = "None";
+                resultList.Add(firstItem);
+            }
+            foreach (var item in tObj)
+            {
+                <#= modelName#>VM newItem = new <#= modelName#>VM();
+                newItem.<#= modelName#>Id = item.<#= modelName#>Id;
+                newItem.Name = item.Name;
+                resultList.Add(newItem);
+            }
+            return Json(resultList, JsonRequestBehavior.AllowGet);
+		}
+
+        public ActionResult Read<#= modelNamePlural#>([DataSourceRequest]DataSourceRequest request)
+        {
+            var tObj = db.<#= modelNamePlural#>;
+            DataSourceResult result = tObj.ToDataSourceResult(request, model => Mapper.Map<<#= modelName#>VM>(model));
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+		[AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Create<#= modelName#>([DataSourceRequest] DataSourceRequest request, <#= modelName#>VM viewModel)
+        {
+            try
+            {
+                if (viewModel != null && ModelState.IsValid)
+                {
+                    <#= modelName#> newviewModel = new <#= modelName#>();
+
+                    newviewModel = Mapper.Map<<#= modelName#>VM, <#= modelName#>>(viewModel, newviewModel);
+
+                    db.<#= modelNamePlural#>.Add(newviewModel);
+                    db.SaveChanges();
+                    viewModel.<#= modelName#>Id = newviewModel.<#= modelName#>Id;
+                }
+            }
+            catch (DataException dataEx)
+            {
+                ModelState.AddModelError(string.Empty, "Could not add <#= modelName#>.");
+                Elmah.ErrorSignal.FromCurrentContext().Raise(dataEx);
+            }
+
+            return Json(new[] { viewModel }.ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Update<#= modelName#>([DataSourceRequest] DataSourceRequest request, <#= modelName#>VM viewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    <#= modelName#> newviewModel = new <#= modelName#>();
+
+                    newviewModel = Mapper.Map<<#= modelName#>VM, <#= modelName#>>(viewModel, newviewModel);
+
+                    db.Entry(newviewModel).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+            catch (DataException dataEx)
+            {
+                ModelState.AddModelError(string.Empty, "Could not update <#= modelName#>.");
+                Elmah.ErrorSignal.FromCurrentContext().Raise(dataEx);
+            }
+
+            return Json(new[] { viewModel }.ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Destroy<#= modelName#>([DataSourceRequest] DataSourceRequest request, <#= modelName#>VM viewModel)
+        {
+            try
+            {
+                if (viewModel != null)
+                {
+                    ModelState.Clear();
+                    <#= modelName#> delviewModel = db.<#= modelNamePlural#>.Find(viewModel.<#= modelName#>Id);
+                    if (delviewModel != null)
+                    {
+                        db.<#= modelNamePlural#>.Remove(delviewModel);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (DbUpdateException dbUpdEx)
+            {
+                ModelState.AddModelError("showerror", "Delete failed.  This is most likely due to related child information that needs to be deleted first.");
+                Elmah.ErrorSignal.FromCurrentContext().Raise(dbUpdEx);
+            }
+            catch (DataException dataEx)
+            {
+                ModelState.AddModelError("hideerror", "Could not delete <#= modelName#>.");
+                Elmah.ErrorSignal.FromCurrentContext().Raise(dataEx);
+            }
+            return Json(ModelState.IsValid ? new object() : ModelState.ToDataSourceResult());
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing) {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

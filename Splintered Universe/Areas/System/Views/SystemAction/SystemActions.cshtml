@@ -1,0 +1,68 @@
+
+<script>
+
+    function SystemActionGridOnError(e) { 
+        SystemActionGrid.cancelChanges();
+            logGridError(e);
+    }
+</script>
+
+<div id="ContentGridBox">
+@(Html.Kendo().Grid<Splintered_Universe.Models.VM.SystemActionVM>()
+    .Name("SystemActionGrid")
+    .Columns(columns =>
+    {
+        columns.Command(c =>
+        {
+                c.Edit();
+                c.Destroy();
+        }).Width(60);
+        columns.Bound(p => p.SystemActionId).Title("Id").Hidden(true);
+        columns.Bound(p => p.SystemActionCategoryName).Title("Category").Width(200);
+        columns.Bound(p => p.Name).Title("Name").Width(200);
+        columns.Bound(p => p.BaseAPCost).Title("AP").Width(50);
+        columns.Bound(p => p.MinAPCost).Title("Min AP").Width(50);
+        columns.Bound(p => p.FatigueCost).Title("Fatigue").Width(50);
+    })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .ServerOperation(false)
+        .Model( m => {
+            m.Id(p => p.SystemActionId);
+            m.Field(f => f.SystemActionId).Editable(false);
+        })
+        .Events( events => events.Error("SystemActionGridOnError"))
+        .Read(read => read.Action("ReadSystemActions", "SystemAction").Data("getSystemId"))
+        .Create( create => create.Action("CreateSystemAction", "SystemAction"))
+        .Update( update => update.Action("UpdateSystemAction", "SystemAction"))
+        .Destroy( destroy => destroy.Action("DestroySystemAction", "SystemAction"))
+        .Sort( s => {
+            s.Add(sc => sc.SystemActionCategoryName).Ascending();
+            s.Add(sc => sc.Name).Ascending();
+        })
+        .PageSize(15)
+    )
+    .Editable( settings => settings.Mode(GridEditMode.PopUp)
+        .DisplayDeleteConfirmation(true)
+        .Window( window => window.Visible(true).Title("Add / Edit Action").Width(420).Actions(a => a.Clear()))
+    )
+    .ToolBar(t => {
+            t.Create().Text("");
+    })
+    .Selectable( s => s.Enabled(true))
+    .Pageable( p => p.Refresh(true).PageSizes(true).PageSizes(new int[] {15,25,50}))
+    .Sortable( s => s.SortMode( GridSortMode.MultipleColumn))
+    .Filterable(filterable => filterable.Enabled(false))
+    .ColumnMenu(colMenu => colMenu.Enabled(false))
+    .Reorderable( reordering => reordering.Columns(false))
+    .Resizable( r => r.Columns(true))
+    .Scrollable(s => s.Height(400))
+)
+</div>
+
+<script>
+    $(function () {
+        SystemActionGrid = $("#SystemActionGrid").data("kendoGrid");
+    });
+</script>
+

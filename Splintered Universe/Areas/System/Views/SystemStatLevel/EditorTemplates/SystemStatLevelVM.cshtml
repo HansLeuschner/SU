@@ -1,0 +1,61 @@
+@model Splintered_Universe.Models.VM.SystemStatLevelVM
+
+
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Stat Level</legend>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Level)
+</div>
+<div class="editor-field">
+    @(Html.Kendo().NumericTextBoxFor(model => model.Level)
+        .Min(3)
+        .Step(1)
+        .Decimals(0)
+        .Format("{0:N0}")
+        .HtmlAttributes(new { @style = "width: 200px;"})
+    )
+    @Html.ValidationMessageFor(model => model.Level)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Description)
+</div>
+<div class="editor-field">
+    @Html.TextAreaFor(model => model.Description, new { @class = "k-textbox"})
+    @Html.ValidationMessageFor(model => model.Description)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.SystemStatSystemStatId)
+</div>
+<div class="editor-field">
+    @(Html.Kendo().DropDownListFor(model => model.SystemStatSystemStatId)
+        .OptionLabel("Choose Stat...")
+        .DataTextField("Name")
+        .DataValueField("SystemStatId")
+        .DataSource(source =>
+        {
+            source.Read(read =>
+            {
+                read.Action("SystemStatsListing", "SystemStat").Data("getSystemId");
+            });
+        })
+        .AutoBind(true)
+        .HtmlAttributes(new { style = "width:200px;" } )
+
+    )
+    @Html.ValidationMessageFor(model => model.SystemStatSystemStatId)
+</div>
+
+
+    </fieldset>
+}
+<br/>
+

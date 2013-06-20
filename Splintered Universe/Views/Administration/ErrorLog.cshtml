@@ -1,0 +1,77 @@
+﻿
+<style>
+</style>
+
+<script>
+
+    var errorLogGrid;
+    var errorLogSearchDropDown;
+
+    function securityRightsGridOnError(e) {
+        securityRightsGrid.cancelChanges();
+        displayUserErrorAlert(e);
+    }
+
+</script>
+
+<div id="ContentGridBox" style="padding-top: 10px;">
+   
+@(Html.Kendo().Grid<Cumis.Models.VM.ElmahErrorVM>()
+    .Name("errorLogGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.Id).Title("Id").Hidden(true);
+        columns.Bound(p => p.TimeUTC).Title("Date/Time").Width(175).Format("{0:yyyy/MM/dd hh:mm:ss:fff tt}");
+        columns.Bound(p => p.User).Title("User").Width(150);
+        columns.Bound(p => p.Message).Title("Error Message").Sortable(false).Filterable(false);
+     })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Model(m =>
+        {
+            m.Id(p => p.Id);
+        })
+
+        .Events(events => events.Error("securityRightsGridOnError"))
+        .Read(read => read
+            .Action("ElmahRead", "Administration")
+        )
+        .Sort(s =>
+        {
+            s.Add(sc => sc.TimeUTC).Descending();
+        })
+        .PageSize(20)
+    )
+    .Editable(settings => settings.Mode(GridEditMode.PopUp)
+        .Enabled(false)
+        //.AdditionalViewData("")
+        .DisplayDeleteConfirmation(true) // or display special message
+        //.TemplateName("SecurityUseCaseEdit")
+        //.Window(window => window.Visible(true).Title("Claim Contact").Actions(e => e.Custom("onEdit")))
+    )
+
+    .Selectable(s => s.Enabled(true))   
+    .Pageable( p => p.Refresh(true).PageSizes(true).PageSizes(new int[] {20,50,100}))
+    .Sortable( s => s.SortMode( GridSortMode.SingleColumn))
+    .Filterable(filterable => filterable.Enabled(true))
+    .ColumnMenu(colMenu => colMenu.Enabled(false))
+    .Reorderable( reordering => reordering.Columns(false))
+    .Resizable( r => r.Columns(true))
+    .Scrollable(s => s.Height(450))
+)
+
+    <div style="text-align:center;padding-top: 10px;">
+        Advanced Error Logging using ELMAH <a target="_blank" href="/elmah.axd">here</a> (opens in a new window)</br>
+    </div>
+</div>
+
+
+<script>
+
+    $(function () {
+        // Notice that the Name() of the tabstrip is used to get its client-side instance
+        errorLogGrid = $("#errorLogGrid").data("kendoGrid");
+        errorLogSearchDropDown = $("#errorLogSearchDropDown").data("kendoDropDownList");
+    });
+
+</script>

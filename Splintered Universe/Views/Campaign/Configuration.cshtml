@@ -1,0 +1,124 @@
+﻿<style>
+    div.k-tabstrip div.k-content {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+</style>
+
+<script>
+    var campaignConfigurationAvailableSystemsDDL;
+    var campaignConfigurationTabstrip;
+
+    var SystemSkillCategoryGrid = null;
+    var SystemSkillGrid = null;
+    var SystemStatGrid = null;
+    var SystemStatLevelGrid = null;
+    var SystemActionCategoryGrid = null;
+    var SystemActionGrid = null;
+
+    function gridButtonDisable(e) {
+        e.preventDefault();
+        return false;
+    }
+
+    function campaignConfigurationAvailableSystemsOnChange(e) {
+        if (this.value() && this.value() != "") {
+            campaignConfigurationTabstrip.enable(campaignConfigurationTabstrip.items(), true);
+            RefreshAllGrids();
+            $("a.k-grid-add").unbind("click", gridButtonDisable);
+            $("a.k-grid-add").show();
+        }
+        else {
+            alert("To Do: disable grids and/or edit ability");
+            campaignConfigurationTabstrip.enable(campaignConfigurationTabstrip.items(),false);
+            RefreshAllGrids();
+            $("a.k-grid-add").bind("click", gridButtonDisable);
+            $(".k-grid-add").hide();
+        }
+    }
+
+    function RefreshAllGrids() {
+        if (SystemSkillCategoryGrid != null) {
+            SystemSkillCategoryGrid.dataSource.read();
+        }
+
+        if (SystemSkillGrid != null) {
+            SystemSkillGrid.dataSource.read();
+        }
+
+        if (SystemActionCategoryGrid != null) {
+            SystemActionCategoryGrid.dataSource.read();
+        }
+
+        if (SystemStatGrid != null) {
+            SystemStatGrid.dataSource.read();
+        }
+
+        if (SystemStatLevelGrid != null) {
+            SystemStatLevelGrid.dataSource.read();
+        }
+
+        if (SystemActionGrid != null) {
+            SystemActionGrid.dataSource.read();
+        }
+    }
+
+    function getSystemId() {
+        return { SystemRuleId: campaignConfigurationAvailableSystemsDDL.value() };
+    }
+
+</script>
+
+<div class="search-bar">
+    System:
+    @(Html.Kendo().DropDownList()
+        .Name("CampaignConfigurationAvailableSystems")
+        .OptionLabel("Choose System...")
+        .DataTextField("SystemName")
+        .DataValueField("SystemRuleId")
+        .DataSource(source =>
+        {
+            source.Read(read =>
+            {
+                read.Action("AvailableSystemsListing", "System", new { Area = "System" });
+            });
+        })
+        .Events(evt => evt.Change("campaignConfigurationAvailableSystemsOnChange"))
+        .AutoBind(true)
+        .HtmlAttributes(new { style = "width:200px;" } )
+    )
+</div>
+
+<div>
+@(Html.Kendo().TabStrip()
+    .Name("campaignConfigurationTabstrip")
+    .Items(items =>
+    {
+        if (@Splintered_Universe.Common.UserRights.UserHasRights("isGM") == true)
+        {
+            items.Add().Text("Skill Categories").LoadContentFrom("SystemSkillCategories", "SystemSkillCategory", new { Area = "System" });
+            items.Add().Text("Skills").LoadContentFrom("SystemSkills", "SystemSkill", new { Area = "System" });
+            items.Add().Text("Action Categories").LoadContentFrom("SystemActionCategories", "SystemActionCategory", new { Area = "System" });
+            items.Add().Text("Actions").LoadContentFrom("SystemActions", "SystemAction", new { Area = "System" });
+            items.Add().Text("Stats").LoadContentFrom("SystemStats", "SystemStat", new { Area = "System" });
+            items.Add().Text("Stat Levels").LoadContentFrom("SystemStatLevels", "SystemStatlevel", new { Area = "System" });
+        }
+        else
+        {
+            items.Add().Text("Campaigns").Content("Access Denied");
+        }
+    })
+    .SelectedIndex(0)
+)
+
+</div>
+
+<script>
+    $(function () {
+        campaignConfigurationAvailableSystemsDDL = $("#CampaignConfigurationAvailableSystems").data("kendoDropDownList");
+        campaignConfigurationTabstrip = $("#campaignConfigurationTabstrip").data("kendoTabStrip");
+        campaignConfigurationTabstrip.enable(campaignConfigurationTabstrip.items(), false);
+
+    });
+</script>

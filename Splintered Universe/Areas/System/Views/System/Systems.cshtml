@@ -1,0 +1,67 @@
+﻿<style>
+ 
+</style>
+
+<script>
+    var systemGrid;
+
+    function systemGridOnError(e) { 
+        systemGrid.cancelChanges();
+        logGridError(e);
+    }
+</script>
+
+<div id="ContentGridBox">
+@(Html.Kendo().Grid<Splintered_Universe.Models.VM.SystemRuleVM>()
+    .Name("systemGrid")
+    .Columns(columns =>
+    {
+        columns.Command(c =>
+        {
+                c.Edit();
+                c.Destroy();
+        }).Width(60);
+        columns.Bound(p => p.SystemRuleId).Title("Id").Hidden(true);
+        columns.Bound(p => p.SystemName).Title("Name").Width(300);
+        columns.Bound(p => p.Description).Title("Description");
+    })
+    .DataSource(dataSource => dataSource
+        .Ajax() 
+        .ServerOperation(false)
+        .Model( m => {
+            m.Id(p => p.SystemRuleId);
+            m.Field(f => f.SystemRuleId).Editable(false);
+        })
+        .Events( events => events.Error("systemGridOnError"))
+        .Read(read => read.Action("Read", "System"))
+        .Create( create => create.Action("Create", "System"))
+        .Update( update => update.Action("Update", "System"))
+        .Destroy( destroy => destroy.Action("Destroy", "System"))
+        .Sort( s => s.Add(sc => sc.SystemName).Ascending())
+        .PageSize(15)
+    )
+    .Editable( settings => settings.Mode(GridEditMode.PopUp)
+        .DisplayDeleteConfirmation(true)
+        //.TemplateName("UsersEdit")
+        .Window( window => window.Visible(true).Title("Add / Edit Campaign").Width(420).Actions(a => a.Clear()))
+    )
+    .ToolBar(t => {
+            t.Create().Text("");
+    })
+    .Selectable( s => s.Enabled(true))
+    .Pageable( p => p.Refresh(true).PageSizes(true).PageSizes(new int[] {15,25,50}))
+    .Sortable( s => s.SortMode( GridSortMode.SingleColumn))
+    .Filterable(filterable => filterable.Enabled(false))
+    .ColumnMenu(colMenu => colMenu.Enabled(false))
+    .Reorderable( reordering => reordering.Columns(false))
+    .Resizable( r => r.Columns(true))
+    .Scrollable(s => s.Height(400))
+)
+</div>
+
+<script>
+    $(function () {
+        // Notice that the Name() of the tabstrip is used to get its client-side instance
+        systemGrid = $("#systemGrid").data("kendoGrid");
+    });
+</script>

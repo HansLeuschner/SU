@@ -1,0 +1,28 @@
+﻿<style>
+    div.k-tabstrip div.k-content {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+</style>
+
+<div>
+@(Html.Kendo().TabStrip()
+    .Name("campaignTabstrip")
+    .Items(items =>
+    {
+        if (@Splintered_Universe.Common.UserRights.UserHasRights("isGM") == true)
+        {
+            items.Add().Text("Systems Listing").LoadContentFrom("Systems", "System", new { Area = "System" });
+            items.Add().Text("Campaigns Listing").LoadContentFrom("Campaigns", "Campaign");
+            items.Add().Text("Characters Listing").LoadContentFrom("Characters", "Character");
+        }
+        else
+        {
+            items.Add().Text("Campaigns").Content("Access Denied");
+        }
+    })
+    .SelectedIndex(0) 
+)
+
+</div>

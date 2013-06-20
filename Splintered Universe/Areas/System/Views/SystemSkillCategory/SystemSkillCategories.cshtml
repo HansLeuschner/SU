@@ -1,0 +1,77 @@
+
+<script>
+
+    function SystemSkillCategoryGridOnError(e) { 
+        SystemSkillCategoryGrid.cancelChanges();
+            logGridError(e);
+    }
+
+    function SystemSkillCategoryGridOnEdit(e) {
+        if (e.model.isNew()) {
+            e.model.set("SystemRuleSystemRuleId", getSystemId().SystemRuleId);
+        }
+    }
+
+</script>
+
+<div id="ContentGridBox">
+@(Html.Kendo().Grid<Splintered_Universe.Models.VM.SystemSkillCategoryVM>()
+    .Name("SystemSkillCategoryGrid")
+    .Columns(columns =>
+    {
+        columns.Command(c =>
+        {
+                c.Edit();
+                c.Destroy();
+        }).Width(60);
+        columns.Bound(p => p.SystemSkillCategoryId).Title("Id").Hidden(true);
+        columns.Bound(p => p.SystemRuleSystemName).Title("System").Width(200);
+        columns.Bound(p => p.Name).Title("Name");
+    })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .ServerOperation(false)
+        .Model( m => {
+            m.Id(p => p.SystemSkillCategoryId);
+            m.Field(f => f.SystemSkillCategoryId).Editable(false);
+            //m.Field(f => f.SystemRuleSystemRuleId).DefaultValue(getSystemId);
+        })
+        .Events( events => {
+            events.Error("SystemSkillCategoryGridOnError");
+        })
+        .Read(read => read.Action("ReadSystemSkillCategories", "SystemSkillCategory").Data("getSystemId"))
+        .Create( create => create.Action("CreateSystemSkillCategory", "SystemSkillCategory"))//.Data("getSystemId"))
+        .Update( update => update.Action("UpdateSystemSkillCategory", "SystemSkillCategory"))
+        .Destroy( destroy => destroy.Action("DestroySystemSkillCategory", "SystemSkillCategory"))
+        .Sort( s => s.Add(sc => sc.Name).Ascending())
+        .PageSize(15)
+    )
+    .Events( grdEvt => grdEvt.Edit("SystemSkillCategoryGridOnEdit"))
+    .Editable( settings => settings.Mode(GridEditMode.PopUp)
+        .DisplayDeleteConfirmation(true)
+        .Window( window => window.Visible(true).Title("Add / Edit Skill Category").Width(420).Actions(a => a.Clear()))
+    )
+    .ToolBar(t => {
+            t.Create().Text("");
+    })
+    .Selectable( s => s.Enabled(true))
+    .Pageable( p => p.Refresh(true).PageSizes(true).PageSizes(new int[] {15,25,50}))
+    .Sortable( s => s.SortMode( GridSortMode.SingleColumn))
+    .Filterable(filterable => filterable.Enabled(false))
+    .ColumnMenu(colMenu => colMenu.Enabled(false))
+    .Reorderable( reordering => reordering.Columns(false))
+    .Resizable( r => r.Columns(true))
+    .Scrollable(s => s.Height(400))
+)
+</div>
+
+<script>
+    $(function () {
+        SystemSkillCategoryGrid = $("#SystemSkillCategoryGrid").data("kendoGrid");
+
+        $("a.k-grid-add").bind("click", gridButtonDisable);
+        $("a.k-grid-edit").bind("click", gridButtonDisable);
+        $("a.k-grid-delete").bind("click", gridButtonDisable);
+    });
+</script>
+

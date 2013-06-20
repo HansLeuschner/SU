@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>@ViewBag.Title</title>
+	<link href="@Url.Content("~/Content/kendo/2013.1.319/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2013.1.319/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2013.1.319/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+
+	<link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Scripts/pnotify/jquery.pnotify.default.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Scripts/pnotify/jquery.pnotify.default.icons.css")" rel="stylesheet" type="text/css" />
+
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/SG.css")" rel="stylesheet" type="text/css" />
+
+	<script src="@Url.Content("~/Scripts/kendo/2013.1.319/jquery.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2013.1.319/kendo.all.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2013.1.319/kendo.aspnetmvc.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery-ui-1.10.2.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery.cookie.js")"></script>
+	<script src="@Url.Content("~/Scripts/pnotify/jquery.pnotify.min.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    @* 
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")"></script>
+    *@
+	<script src="@Url.Content("~/Scripts/SU.js")"></script>
+
+    <!-- Support HTML5 is older browsers -->
+    <!--[if lt IE 9]>
+        <script src="@Url.Content("~/Scripts/html5shiv.js")"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<div class="page">
+		<header>
+            <div class="content-wrapper">
+                <div id="title">
+                    <h1>
+                        Splintered Universe
+                        <!-- <img src="~/Content/images/logo.jpg" alt="" border="0" title="Cumis Bond Application" /> -->
+
+                    </h1>
+                </div>
+                <div class="welcometext fright">
+
+                    @{
+                        if (((Splintered_Universe.Models.VM.UserSessionVM)(HttpContext.Current.Session["UserSession"])) != null)
+                        {
+                            string username = ((Splintered_Universe.Models.VM.UserSessionVM)(HttpContext.Current.Session["UserSession"])).UserName;                    
+                        <section id="login">
+                            Hello, <span class="username">@username
+                            </span>
+                        </section>
+                        }
+                        else
+                        {
+                            Response.Redirect(Url.Action("Logout", "Login"));
+                        }
+                    }
+                    |@Html.ActionLink("Logout", "Logout", "Login")&nbsp;<img src="~/Content/images/logout.jpg" alt="" border="0" />
+                </div>
+                <div class="global-selectors">
+                    Current Campaign: <input id="globalCampaign" style="width: 200px;"/>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <div style="clear: both"></div>
+
+            <div id="navigation">
+			    @(Html.Kendo().Menu()
+					.Name("mainMenu")
+					.Items(menu => {
+						menu.Add().Text("Home").Action("Index", "Home");
+                        menu.Add().Text("Player").Action("Index", "Player");
+                        if (@Splintered_Universe.Common.UserRights.UserHasRights("isGM") == true)
+                        {
+                            menu.Add().Text("GM").Items(gmChildren =>
+                            {
+                                gmChildren.Add().Text("Management").Action("Management", "Campaign");
+                                gmChildren.Add().Text("Campaign Configuration").Action("Configuration", "Campaign");
+                            });
+                        }
+                        if (@Splintered_Universe.Common.UserRights.UserHasRights("isAdmin") == true)
+                        {
+                            menu.Add().Text("Administration").Items(adminMenu =>
+                            {
+                                adminMenu.Add().Text("User Management").Action("UserManagement", "Users");
+                                adminMenu.Add().Text("Error Log").Action("UserErrorLog", "Administration");
+                            });
+                        }
+						menu.Add().Text("About").Action("About", "Home");
+				}))
+            </div>
+		</header>
+		<section id="main">
+            <div class="main-wrapper">
+			    @RenderBody()
+            </div>
+		</section>
+		<footer>
+            Powered by SpringGage
+		</footer>
+	</div>
+</body>
+</html>

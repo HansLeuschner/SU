@@ -1,0 +1,118 @@
+﻿@model Splintered_Universe.Models.VM.CampaignVM
+<style>
+    .k-icon.k-update, .k-icon.k-cancel  {
+        background-image: none;
+    }
+</style>
+
+@using (Html.BeginForm()) {
+    <div class="popupcontent" style="width: 620px;">
+    @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.CampaignId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)<span style="color:red">*</span>
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Name,  new { @style = "width:250px", @autocomplete = "off", @class = "k-textbox" })
+            <div class="popupvalidation">
+                @Html.ValidationMessageFor(model => model.Name)
+
+            </div>
+        </div>
+       <div style="clear: both;"></div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)<span style="color:red">*</span>
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Description,  new { @style = "width:250px", @autocomplete = "off", @class = "k-textbox" })
+            <div class="popupvalidation">
+                @Html.ValidationMessageFor(model => model.Description)
+
+            </div>
+        </div>
+       <div style="clear: both;"></div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartDate)
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DatePickerFor(m => m.StartDate)
+                .HtmlAttributes(new {style="width:250px"})
+                //.Format("yyyy/MM/dd")
+            )
+            <div class="popupvalidation">
+                @Html.ValidationMessageFor(model => model.StartDate)
+            </div>
+        </div>
+       <div style="clear: both;"></div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndDate)
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DatePickerFor(m => m.EndDate)
+                .HtmlAttributes(new {style="width:250px"})
+                //.Format("yyyy/MM/dd")
+            )
+            <div class="popupvalidation">
+                @Html.ValidationMessageFor(model => model.EndDate)
+            </div>
+        </div>
+       <div style="clear: both;"></div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SystemId)<span style="color:red">*</span>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(model => model.SystemId)
+                  .DataTextField("SystemName")
+                  .DataValueField("SystemRuleId")
+                  .OptionLabel("Choose a System ...")
+                  .DataSource(source =>
+                  {
+                      source.Read(read =>
+                      {
+                          read.Action("SystemsListing", "System", new { Area = "System" } );
+                      });
+                  })
+                  .AutoBind(true)
+                  .HtmlAttributes(new { style = "width:250px;" } )
+            )
+            <div class="popupvalidation">
+                @Html.ValidationMessageFor(model => model.SystemId)
+
+            </div>
+        </div>
+       <div style="clear: both;"></div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GameMasterId)<span style="color:red">*</span>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(model => model.GameMasterId)
+                  .DataTextField("Name")
+                  .DataValueField("UserId")
+                  .OptionLabel("Choose a Game Master ...")
+                  .DataSource(source =>
+                  {
+                      source.Read(read =>
+                      {
+                          read.Action("GMsListing", "Users");
+                      });
+                  })
+                  .AutoBind(true)
+                  .HtmlAttributes(new { style = "width:250px;" } )
+            )
+            <div class="popupvalidation">
+                @Html.ValidationMessageFor(model => model.GameMasterId)
+
+            </div>
+        </div>
+       <div style="clear: both;"></div>
+
+    </div>
+}
+<br />

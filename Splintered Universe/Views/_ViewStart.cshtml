@@ -1,0 +1,11 @@
+﻿@{
+    
+    if (Convert.ToBoolean(ViewContext.Controller.ViewData["CanExcludeMasterPage"]) == true)
+    {
+        Layout = null;
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}

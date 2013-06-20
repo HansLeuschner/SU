@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7526f140311c47f5b959d9bfd983b049" Name="Diagram1" ZoomLevel="82" >
+        <EntityTypeShape EntityType="SUModel.Character" Width="2" PointX="4.125" PointY="4.375" />
+        <EntityTypeShape EntityType="SUModel.Campaign" Width="1.875" PointX="1.125" PointY="4.25" />
+        <AssociationConnector Association="SUModel.CampaignCharacter" ManuallyRouted="false" >
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SUModel.User" Width="1.5" PointX="2.625" PointY="1.125" />
+        <EntityTypeShape EntityType="SUModel.SystemRule" Width="2" PointX="0.875" PointY="12.25" />
+        <EntityTypeShape EntityType="SUModel.SystemSkill" Width="2.875" PointX="4.25" PointY="7.625" />
+        <AssociationConnector Association="SUModel.SystemRulesCampaign" ManuallyRouted="false" >
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SUModel.ELMAH_Error" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="SUModel.UserCharacter" ></AssociationConnector>
+        <AssociationConnector Association="SUModel.UserCampaign" />
+        <EntityTypeShape EntityType="SUModel.SystemStatLevel" Width="2" PointX="8.25" PointY="7.5" />
+        <EntityTypeShape EntityType="SUModel.SystemStat" Width="2" PointX="8.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUModel.SystemSkillCategory" Width="2.75" PointX="4.25" PointY="11" />
+        <EntityTypeShape EntityType="SUModel.SystemAction" Width="3.125" PointX="11" PointY="8.125" />
+        <EntityTypeShape EntityType="SUModel.SystemActionCategory" Width="2" PointX="10.5" PointY="12.875" />
+        <EntityTypeShape EntityType="SUModel.CombatEncounter" Width="1.75" PointX="7" PointY="4.75" />
+        <AssociationConnector Association="SUModel.CampaignCombatEncounter" />
+        <EntityTypeShape EntityType="SUModel.CombatEncounterItem" Width="2.625" PointX="10.5" PointY="4" />
+        <AssociationConnector Association="SUModel.SystemActionCombatEncounterItem" />
+        <AssociationConnector Association="SUModel.CombatEncounterCombatEncounterItem" />
+        <AssociationConnector Association="SUModel.CharacterCombatEncounterItem" />
+        <AssociationConnector Association="SUModel.SystemRuleSystemSkillCategory" />
+        <AssociationConnector Association="SUModel.SystemRuleSystemStat" />
+        <AssociationConnector Association="SUModel.SystemRuleSystemActionCategory" />
+        <AssociationConnector Association="SUModel.SystemActionCategorySystemAction" />
+        <AssociationConnector Association="SUModel.SystemStatSystemSkill" />
+        <AssociationConnector Association="SUModel.SystemSkillCategorySystemSkill" />
+        <AssociationConnector Association="SUModel.SystemStatSystemStatLevel" />
+        <AssociationConnector Association="SUModel.SystemActionSystemSkill" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,67 @@
+﻿@model Splintered_Universe.Models.VM.LoginViewModel
+@{
+    Layout = null;
+}
+<html>
+<head>    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>  
+    <link rel="SHORTCUT ICON" href="http://www.mydomain.com/content/favicon.ico"/>      
+    <title>Login</title>
+
+	<script src="@Url.Content("~/Scripts/kendo/2013.1.319/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <link href="~/Content/reset.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#txtusername").focus();
+        });
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm("LoginUser","Login",FormMethod.Post)) {
+        @Html.ValidationSummary(true)
+
+        <div id="loginbox">
+            <!--
+            <div class="logo"><img src="~/Content/images/logo.jpg" alt="" border="0" /></div>
+            -->
+            <div id="login">
+                <fieldset>
+                <legend>Login</legend>
+    
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.LoginName)
+                    
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.LoginName, new {@id="txtusername" })<br />  
+                    @Html.ValidationMessageFor(model => model.LoginName)
+                </div>
+    
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Password)
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(model => model.Password,new {@id="txtpassword" })
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+                    @if ( ViewData["IsValidUser"] != null && !Convert.ToBoolean(ViewData["IsValidUser"]))
+                    {
+                        <div>
+                        <span style="color:red">Invalid User Name and Password</span>    
+                        </div>                        
+                    }
+    
+                <p>
+                    <input type="submit" value="Login" />
+                </p>
+            </fieldset>
+
+            </div>
+        </div>
+    }
+</body>
+</html>

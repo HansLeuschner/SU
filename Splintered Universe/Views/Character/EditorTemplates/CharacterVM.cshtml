@@ -1,0 +1,79 @@
+﻿@model Splintered_Universe.Models.VM.CharacterVM
+<style>
+    .k-icon.k-update, .k-icon.k-cancel  {
+        background-image: none;
+    }
+</style>
+
+@using (Html.BeginForm()) {
+    <div class="popupcontent" style="width: 620px;">
+    @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.CharacterId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)<span style="color:red">*</span>
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Name,  new { @style = "width:250px", @autocomplete = "off", @class = "k-textbox" })
+            <div class="popupvalidation">
+                @Html.ValidationMessageFor(model => model.Name)
+
+            </div>
+        </div>
+       <div style="clear: both;"></div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PlayerId)<span style="color:red">*</span>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(model => model.PlayerId)
+                  .DataTextField("Name")
+                  .DataValueField("UserId")
+                  .OptionLabel("Choose a Player ...")
+                  .DataSource(source =>
+                  {
+                      source.Read(read =>
+                      {
+                          read.Action("PlayersListing", "Users");
+                      });
+                  })
+                  .AutoBind(true)
+                  .HtmlAttributes(new { style = "width:250px;" } )
+            )
+            <div class="popupvalidation">
+                @Html.ValidationMessageFor(model => model.PlayerId)
+
+            </div>
+        </div>
+       <div style="clear: both;"></div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CampaignId)<span style="color:red">*</span>
+        </div>
+        <div class="editor-field">
+            @(Html.Kendo().DropDownListFor(model => model.CampaignId)
+                  .DataTextField("Name")
+                  .DataValueField("CampaignId")
+                  .OptionLabel("Choose a Campaign ...")
+                  .DataSource(source =>
+                  {
+                      source.Read(read =>
+                      {
+                          read.Action("CampaignsListing", "Campaign");
+                      });
+                  })
+                  .AutoBind(true)
+                  .HtmlAttributes(new { style = "width:250px;" } )
+            )
+            <div class="popupvalidation">
+                @Html.ValidationMessageFor(model => model.CampaignId)
+
+            </div>
+        </div>
+       <div style="clear: both;"></div>
+
+    </div>
+}
+<br />

@@ -1,0 +1,1147 @@
+﻿/*----------------------------------------------------------
+The base color for this template is #5c87b2. If you'd like
+to use a different color start by replacing all instances of
+#5c87b2 with your new color.
+----------------------------------------------------------*/
+* {
+margin: 0;
+padding: 0;
+border:0;
+outline:0;
+}
+img {
+border:0;
+}
+
+body
+{
+    background-color: /*#5c87b2 #f3c47e #f5d6a8 #f5d9af*/ #ccc;
+    font-size: 75%;
+    font-family: Tahoma, Geneva, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #696969;
+}
+header,
+footer,
+nav,
+section 
+{
+    display: block;
+}
+
+/* HEADINGS   
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #000;
+}
+
+h1
+{
+    font-size: 2em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+h2
+{
+    padding: 0 0 10px 0;
+}
+
+h3
+{
+    font-size: 1.2em;
+}
+
+h4
+{
+    font-size: 1.1em;
+}
+
+h5, h6
+{
+    font-size: 1em;
+}
+
+a
+{
+    color: #696969;
+}
+
+li
+{
+    line-height: 1.6;
+}
+
+/* this rule styles <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0;
+}
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+/* you can specify a greater or lesser percentage for the 
+page width. Or, you can specify an exact pixel width. */
+.page
+{
+    width: 90%;
+    width: 1024px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #544135;
+    border: 1px solid #aaa;
+    margin: 30px auto;
+    margin: 0 auto;
+    background: white;
+}
+/* ----- for New theme ----*/
+header, #header
+{
+    position: relative;
+    margin-bottom: 0px;
+    color: #000;
+    padding: 0;
+}
+
+header h1, #header h1
+{
+    font-weight: bold;
+    padding: 0 10px;
+    margin: 0;
+    color: black;
+    border: none;
+    line-height: 36px;
+    font-size: 32px !important;
+    padding: 15px 0 0 20px;
+}
+
+#main
+{
+    background: #fff;
+    padding: 15px 30px 0px 30px;
+    /*margin-bottom: 30px;*/
+    _height: 1px; /* only IE6 applies CSS properties starting with an underscore */
+    min-height: 500px;
+    padding: 10px;
+    background: url(images/content-bg.jpg) repeat-x;
+    overflow:hidden;
+}
+
+div.main-wrapper {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    min-height: 460px;
+    height: 100%;
+    padding: 20px;
+
+}
+footer, #footer
+{
+    color: #999;
+    padding: 10px 0;
+    text-align: center;
+    line-height: normal;
+    margin: 0;
+    font-size: .9em;
+}
+
+/* MENU   
+----------------------------------------------------------*/
+#menu
+{
+    position: relative;
+    margin: 0;
+    text-align: right;
+    /*background:url(images/nav-bg.jpg) repeat-x;*/
+}
+
+#menu .t-item
+{
+    border-width: 0 0 0 1px;
+}
+
+#menu .t-link
+{
+    padding: 5px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 1.8em;
+}
+
+ /*FORM LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset 
+{
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend 
+{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea 
+{
+    min-height: 75px;
+    min-width: 200px;
+}
+
+input[type="text"] 
+{
+    width: 200px;
+    border: 1px solid #CCC;
+}
+
+input[type="password"] 
+{
+    width: 200px;
+    border: 1px solid #CCC;
+}
+
+
+/* TABLE
+----------------------------------------------------------*/
+
+table 
+{
+  border: solid 1px #e8eef4;
+  border-collapse: collapse;
+}
+
+table td 
+{
+  padding: 5px;   
+  border: solid 1px #e8eef4;
+}
+
+table th
+{
+  padding: 6px 5px;
+  text-align: left;
+  background-color: #e8eef4; 
+  border: solid 1px #e8eef4;   
+}
+
+/* MISC  
+----------------------------------------------------------*/
+.clear
+{
+    clear: both;
+}
+
+.error
+{
+    color: Red;
+}
+
+div#title
+{
+    display: block;
+    text-align: left;
+    /*width: 70%; */
+    float: left;
+}
+
+#logindisplay
+{
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    margin: 10px;
+    color: White;
+}
+
+#logindisplay a:link
+{
+    color: white;
+    text-decoration: underline;
+}
+
+#logindisplay a:visited
+{
+    color: white;
+    text-decoration: underline;
+}
+
+#logindisplay a:hover
+{
+    color: white;
+    text-decoration: none;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------
+.display-label,
+.editor-label
+{
+    margin: 1em 0 0 0;
+}
+
+.display-field,
+.editor-field
+{
+    margin:0.5em 0 0 0;
+}
+
+.text-box
+{
+    width: 30em;
+}
+
+.text-box.multi-line
+{
+    height: 6.5em;
+}
+
+.tri-state
+{
+    width: 6em;
+}
+*/
+
+/*  styles for pages
+ ----------------------   */
+#client-details-header
+{
+    height: 90px;
+}
+
+#debug-console
+{
+   background: #fff;
+   padding: 10px 20px 10px 20px;
+   margin-bottom: 30px;
+   _height: 1px; /* only IE6 applies CSS properties starting with an underscore */
+}
+
+.content-wrapper
+{
+    background: #fff;
+    padding: 5px;
+    min-height: 15px;
+}
+
+.float-right
+{
+    float: right;
+}
+
+
+
+/* --- for Login box 26th Dec. 12 -- */
+#loginbox
+{
+ background: #FFF;
+ width: 350px;
+ padding: 15px 30px;
+ border: 1px solid #867870;
+ margin: 40px 35% !important ;
+ border-radius: 8px !important;
+}
+
+#login fieldset
+{
+    background:#fffFFF;
+    padding:10px;
+    font-size:14px;
+    font-weight:normal;
+    border-radius:4px !important;    
+}
+
+    #login .editor-label
+    {
+    margin: 15px 0 3px 0;
+    font-size: 14px;
+    color: #333;
+    }
+
+    #login input[type="text"]
+{
+    margin: 0px 0px 5px 0px;
+    width: 300px;
+    height: 25px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    color: #333;
+    }
+     #login input[type="password"]
+{
+    margin: 0px 0px 5px 0px;
+    width: 300px;
+    height: 25px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    color: #333;
+    }
+
+    #login input[type="submit"], .btn
+{
+    margin: 10px 0px 20px 0px;
+    height: 30px;
+    background: #999;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    padding: 0px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    }
+
+.fright
+{
+    float: right;
+}
+
+.fleft
+{
+    float: left;
+}
+.global-selectors {
+    float: right;
+    margin: 20px 5px 0 5px;
+}
+
+.welcometext
+{ font-size:12px;
+  margin: 20px 20px 0 0;
+}
+    .welcometext img
+    {
+        padding: -2px 0 0 0 ;
+        height: 11px;
+    }
+    .welcometext a
+    {
+    color:#0f9dc3;
+    text-decoration:none;
+    line-height:20px;
+    padding:0px 1px 0px 3px;
+    }
+
+    .welcometext a:hover
+    {
+            text-decoration: underline;
+}
+
+.welcometext #login
+{
+    float: left;
+    padding-right:5px;    
+    color:#c41330;
+    font-size:12px;
+    font-weight:bold;
+    line-height: 20px;
+}
+
+    .welcometext #login span
+    {
+            width: 30px;
+        }
+
+/*-- for navigation menu --*/
+.k-widget
+{
+    border: none;
+}
+
+#navigation
+{
+    width: 100%;
+    margin: 0 auto;
+    font-family: Tahoma, Geneva, sans-serif;
+}
+
+    #navigation ul
+    {
+        width: 100%;
+        padding: 8px 0 3px;
+        background: url(images/nav-bg.jpg) repeat-x!important;
+    }
+
+    #navigation ul li
+    {
+        padding: 0 25px;
+        /*height:50px;*/
+            font-size: 16px;
+    }
+
+    #navigation ul li:hover
+    {
+                background: none;
+    }
+
+    #navigation li ul
+    {
+        background: #f7f3f2!important;
+        margin: 0px!important;
+        padding: 0px!important;
+        clear: both;
+         width:180px;
+           left:40px;
+    }
+
+    #navigation li ul li
+    {
+            text-align: left;
+            padding: 0px;
+            margin: 0px;
+            font-size: 14px;
+            width:180px;
+        /*height:20px!important;*/
+            line-height: none;
+             
+    }
+
+    #navigation li li ul
+    {
+        width: auto;
+         width:180px;
+           left:40px;
+    }
+
+    #navigation li ul li:hover, #navigation li ul li a:hover
+    {
+        background: #db0b2f!important;
+        border-radius: 0px;
+    }
+    /*--- navigation complete ---*/
+
+.k-panelbar > .k-item > .k-link
+{
+    /*background:url(images/nav-bg.jpg) repeat-x !important;*/
+    color: #333;
+}
+
+#client-details-header
+{
+    margin: 10px auto;
+    padding-top: 5px;
+    width: 98%;
+}
+
+.k-widget
+{
+    /* HCl width: 98%; */
+    margin: 0 auto;
+    background: transparent!important;
+}
+
+#main .k-widget
+{
+    margin: 0 auto;
+    background: transparent!important;
+    border: 0px solid red!important;
+}
+
+.k-tabstrip-items
+{
+    background: none;
+}
+
+.claim-contact-main-tabstrip ul li
+{
+    border: 1px solid green!important;
+}
+
+.k-menu .k-item > .k-link
+{
+    background: none;
+}
+
+
+.k-menu .k-item, .k-widget.k-menu-horizontal > .k-item
+{
+    border: 0px solid;
+}
+
+.k-tabstrip-items .k-link, .k-panelbar .k-tabstrip-items .k-link
+{
+    background: url("images/tab-bg.png") repeat-x scroll 0 0 transparent;
+    color: #FFFFFF;
+    height: 16px;
+}
+
+.k-tabstrip-items ul
+{
+    background: red!important;
+    height: 28px!important;
+}
+
+.k-tabstrip-items li
+{
+    height: 26px;
+}
+
+.k-tabstrip .k-content
+{
+    margin-top: 1px;
+    padding: 0 !important;
+}
+
+table, table th, table td
+{
+    border: none;
+}
+
+.k-button, .k-button:hover, p .k-button
+{
+    background: url("images/tab-bg.png") repeat-x scroll 0 0 transparent;
+        border: 1px solid #9A7661;
+        color: #000000;
+        cursor: pointer;
+        font-size: 12px;
+        /*height: 30px;*/
+        margin: 10px 0 20px;
+        /*padding: 0 15px;  */
+    }
+
+.k-grid .k-button, .k-edit-form-container .k-button
+{
+    margin: 0;
+}
+
+input[type="text"], input[type="password"], select, textarea
+{
+    font-size: 12px!important;
+    color: #696969!important;
+    height: 20px;
+}
+
+.k-window
+{
+    width: auto!important;
+    margin: 0 auto;
+}
+
+.k-edit-form-container
+{
+    width: auto;
+}
+
+.content-wrapper
+{
+    /*background: url("images/header-image.jpg") no-repeat scroll 200px bottom transparent; */
+    height: 83px;
+}
+
+.k-menu .k-item > .k-link
+{
+    margin: 0px 0 0; 
+    color: #888888;
+}
+
+.k-menu .k-item > .k-link:hover
+{
+        background: #c51230;
+        border-radius: 12px;
+        color: #ffffff;
+}
+
+.k-state-selected, .k-state-selected:link, .k-list > .k-state-selected, .k-list > .k-state-focused, .k-list > .k-state-highlight, .k-panel > .k-state-selected, .k-button:active, .k-ghost-splitbar-vertical, .k-ghost-splitbar-horizontal, .k-draghandle.k-state-selected:hover
+{
+    background: #ccc;
+}
+
+.k-textbox
+{
+    border: 1px solid #a6a5a3!important;
+    height: 27px!important;
+}
+
+.k-textbox:disabled, .k-textbox:disabled:hover
+{
+        border: 1px solid #d5d5d5;
+        background: #f3f2f2;
+        height: 27px!important;
+}
+
+.grd
+{
+    height: 27px!important;
+    padding: 5px 0px 0px 0px;
+}
+
+#main .k-widget .leftside
+{
+    margin-top: 10px;
+}
+
+#main .k-widget .rightside 
+{
+    background: url("images/main-pane-bg.jpg") repeat-x scroll 0 0 !important;
+    height: 524px;
+    border-radius: 4px;
+    margin-top: 10px!important;
+    padding-left: 10px;
+    overflow:auto;
+}
+
+.k-splitbar
+{
+    margin-top: 10px!important;
+    background: none;
+    border: none;
+}
+
+#client-details-header table td
+{
+    color: #fff;
+}
+
+#main .k-widget .leftside .k-tabstrip .k-content, #main .k-widget .rightside .k-tabstrip .k-content
+{
+    background: url("images/main-pane-form-bg.jpg") repeat-x scroll 0 0 #eeebe6 !important;
+    border-radius: 0 9px 9px 9px;
+    border: 1px solid #ccc!important;
+    /* HCl width: 95%; */
+}
+
+#main .k-widget .rightside .k-tabstrip .k-content
+{
+    border: 0px solid red!important;
+}
+
+.k-tabstrip-items .k-state-active
+{
+    background: none;
+}
+
+.k-panelbar .k-tabstrip-items .k-state-active a, .k-tabstrip-items .k-state-active a
+{
+        color: #c3122f;
+        background: #febf22;
+        border: 1px solid #ccc;
+}
+
+.k-tabstrip-items .k-item, .k-panelbar .k-tabstrip-items .k-item 
+{
+    border-style: solid !important;
+    border-width: 0 !important;
+    margin: 0 2px 0 0;
+}
+
+.k-tabstrip-items .k-item
+{
+    background-image: none !important;
+}
+
+ul.k-reset li
+{
+    background: none;
+    border: none;
+    margin: 0 5px 0 0;
+}
+
+#client-details-header
+{
+    background: url("images/client-info.jpg") no-repeat scroll right 15px transparent !important;
+    height: 128px;
+}
+
+#client-details-header table
+{
+        width: 75% !important;
+        margin-top: 5px;
+}
+
+#client-details-header table input
+{
+            width: 100% !important;
+}
+
+#contractCleintSplitter
+{
+    height: 537px !important;
+}
+
+.k-scrollable
+{
+    height: auto !important;
+}
+
+#main .buttonbox
+{
+    background: url("images/button-box-bg.png") repeat-x scroll right top transparent !important;
+    height: 42px;
+    border: none;
+    border-radius: 0 0 4px 4px;
+}
+
+p .k-button, p .k-button:hover
+{
+    border: none;
+    color: #FEBF22;
+    cursor: pointer;
+    font-size: 12px;
+    height: 25px;
+    margin: 10px 7px 5px 2%;
+    padding: 0 0 0 28px !important;
+    font-weight: bold;
+}
+
+    p .k-button[disabled="disabled"]
+    {
+        border: none;
+    color: #ccc!important;
+    cursor: default;
+    font-size: 12px;
+    height: 25px;
+    margin: 10px 7px 5px 2%;
+    padding: 0 0 0 28px !important;
+        font-weight: normal;
+}
+
+.k-splitter .k-scrollable
+{
+    overflow: none;
+}
+
+.panel
+{
+    height: auto !important;
+}
+
+.searchhide
+{
+    height: 465px;
+    overflow-y: auto;
+}
+
+.searchshow
+{
+    height: 250px;
+    overflow-y: auto;
+}
+
+.hidesrch
+{
+    display: none !important;
+}
+
+.k-window-titlebar
+{
+    font-weight: bold;
+}
+
+.k-window-content
+{
+    background: #EEEBE6 !important;
+    padding: 0px!important;
+}
+
+.k-window table tr:nth-of-type(odd)
+{
+    width: 150px;
+}
+
+.k-window table tr:nth-of-type(even)
+{
+    width: 120px;
+}
+
+.popup
+{
+    margin: 0px;
+    height: auto!important;
+}
+
+.popupcontent
+{
+    margin: 10px;
+    height: auto!important;
+}
+
+.popup .buttonbox, .popup .buttonbox-create /*, .k-window-content .k-edit-form-container .buttonbox*/
+{
+    background: url("images/button-box-bg.png") repeat-x scroll right top transparent !important;
+    border: none;
+    border-radius: 0 0 2px 2px;
+}
+
+    .popup .buttonbox p, .popup .buttonbox-create p /*, .k-window-content .k-edit-form-container .buttonbox p*/
+    {
+        margin: 0;
+        padding: 0;
+}
+
+        .popup .buttonbox p .k-button, .popup .buttonbox p .k-button:hover, .popup .k-button, .popup .k-button:hover
+        {
+            border: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 12px;
+    height: 25px;
+    margin: 10px 15px 20px 8% !important;
+    padding: 0 0 0 28px !important;
+            font-weight: bold;
+}
+
+            .popup .buttonbox p .k-button[disabled="disabled"], .popup .k-button[disabled="disabled"]
+            {
+                border: none;
+    color: #ccc!important;
+    cursor: default;
+    font-size: 12px;
+    height: 25px;
+    margin: 10px 15px 20px 8% !important;
+    padding: 0 0 0 28px !important;
+                font-weight: normal;
+}
+
+/*#contractClientPanelBar-2
+{
+    display:block !important;
+    height:auto !important;
+    overflow: visible !important;
+}*/
+
+/*.popup .buttonbox-create p .k-button, .popup .buttonbox-create p .k-button:hover {
+    border:none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 12px;
+    height: 25px;
+    margin: 10px 15px 7px 8% !important;
+    padding: 0 0 0 28px !important;
+    font-weight:bold;
+}
+.popup .buttonbox-create p .k-button[disabled="disabled"] 
+{
+    font-weight:normal;
+}*/
+.k-window .k-tooltip-validation
+{
+    width: auto!important;
+    background: #ffe79f !important;
+}
+/*.k-window-content .k-edit-form-container a
+{
+    visibility: hidden;
+    display:none
+}*/
+/*.k-window-content .k-edit-form-container .buttonbox p .k-button 
+{  
+    visibility: visible!important;
+}
+.k-window-content .k-edit-form-container .buttonbox p .k-button {
+    border:none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 12px;
+    height: 25px;
+    margin: 10px 15px 7px 8% !important;
+    padding: 0 0 0 28px !important;
+    font-weight:bold;
+}*/
+.k-grid-update, .k-grid-update:hover, 
+.k-grid-cancel, .k-grid-cancel:hover
+{
+    background: url("images/tab-bg.png") repeat-x scroll right top transparent !important;
+    border: 1px solid #ccc;
+    color: #fff;
+    font-weight: bold !important;
+    margin: 0 10px 15px 12px!important;
+}
+
+.k-grid-add, .k-grid-add:hover,
+.k-grid-edit, .k-grid-edit:hover,
+.k-grid-delete, .k-grid-delete:hover
+{
+    /*background:none !important;*/
+    border: none !important;
+}
+
+#ContentGridBox
+{
+    border-radius: 8px;
+    background: #fff;
+    margin: 5px auto 0 auto;
+    width: 98%;
+}
+
+.k-reorderable th .k-header
+{
+    background: green!important;
+}
+
+.searchbox
+{
+    background: url("images/search-box-bg.jpg") repeat-x scroll right top transparent !important;
+    border-radius: 8px;
+    margin: 0;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.searchbox .k-button
+{
+    background: url("images/tab-bg.png") repeat-x scroll 0 0 transparent;
+    border: 1px solid #9A7661;
+    color: #000000;
+    cursor: pointer;
+    font-size: 12px;
+    margin: 18px 0 20px;
+}
+/*---- FOR TABLE GRID ---*/
+table th
+{
+    background: #FEBF22 !important;
+    font-size: 14px !important;
+    color: #403b31 !important;
+    padding: 2px 0px 2px 5px !important;
+}
+
+#ContentGridBox table td
+{
+    padding: 1px 0 1px 5px !important;
+}
+/*table td
+{
+    color:#4b494a;
+}
+
+table tr:nth-child(odd)
+{
+    background:#FFF !important;
+}
+table tr:nth-child(even)
+{
+    background:#f0eeef !important;
+}*/
+/*---- for pagination ----*/
+.k-pager-wrap ul li span
+{
+    background: #c51230;
+    border: 1px solid #c51230;
+}
+
+.k-icon, .k-tool-icon, .k-grouping-dropclue, .k-drop-hint, .k-callout, .k-column-menu .k-sprite
+{
+    /*background: none!important;*/
+}
+
+.k-edit-form-container .k-grid-update
+{
+    color: #fff !important;
+    background: url("images/update-grid-icon.png") no-repeat scroll 5px 5px #858482 !important;
+}
+
+.k-edit-form-container .k-grid-cancel
+{
+    color: #fff !important;
+    background: url("images/cancel-grid-icon.png") no-repeat scroll 5px 5px #858482 !important;
+}
+
+.searchbox .searchtext
+{
+    font-size: 12px;
+    color: #666;
+    line-height: 30px;
+}
+
+#searchwrapper
+{
+    width: 500px; /*follow your image's size*/
+    height: 40px; /*follow your image's size*/
+    background-image: url();
+    background-repeat: no-repeat; /*important*/
+    padding: 0px;
+    margin: 0px;
+    float: left;
+    position: relative; /*important*/
+}
+
+    #searchwrapper form
+    {
+        display: inline;
+}
+
+.search
+{
+    border: 1px solid #ccc; /*important*/
+    position: absolute; /*important*/
+    border-radius: 5px;
+    top: 4px;
+padding: 2px 22px 2px 5px!important;
+    left: 9px;
+    width: 500px!important;
+    height: 20px;
+}
+.searchbox_submit {
+    /*background: url("images/search-icon.png") no-repeat scroll 0 0 !important;
+    height: 15px;
+    width: 15px;*/
+    left: 490px;
+    position: absolute;
+    top: 10px;
+    
+    border:0px solid red!important
+}
+
+.k-i-arrowhead-s
+{
+    background-position: -3px -288px!important;
+}
+
+#popupcontent .k-grid-update
+{
+    color: #fff !important;
+    background: url("images/update-grid-icon.png") no-repeat scroll 5px 5px #858482 !important;
+    border: 1px solid red;
+}
+
+input[type="image"] .searchbox_submit
+{
+    border:2px solid green !important;
+}
+#ContentGridBox .searchbox #searchwrapper input[type="image"] .searchbox_submit
+{
+
+}
+.popupvalidation
+{
+    background: url("images/validation-image.png") no-repeat scroll 8px 5px #FFE9A8!important; border-radius: 5px 5px 5px 5px;  margin-top:5px; line-height: 24px; opacity: 0.8; padding: 0 0 0 28px; position: absolute;  width: 200px; z-index: 1000;
+}
+/*.k-callout-n
+{
+    background:none !important
+}*/

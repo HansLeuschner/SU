@@ -1,0 +1,80 @@
+﻿<style>
+ 
+</style>
+
+<script>
+    var usersGrid;
+
+    function usersGridOnError(e) { 
+        usersGrid.cancelChanges();
+        if (e && e.errors && e.errors.showerror) {
+            showErrorAlert(e.errors.showerror.errors);
+        }
+    }
+</script>
+
+<div id="ContentGridBox">
+@(Html.Kendo().Grid<Splintered_Universe.Models.VM.UserViewModel>()
+    .Name("usersGrid")
+    .Columns(columns =>
+    {
+        columns.Command(c =>
+        {
+                c.Edit();
+                c.Destroy();
+        }).Width(60);
+        columns.Bound(p => p.UserId).Title("Id").Hidden(true);
+        columns.Bound(p => p.Name).Title("Name");
+        columns.Bound(p => p.CanBeGM).Title("Can Be GM").ClientTemplate(
+                      "<input class='k-widget k-state-disabled' name='CanBeGM' type='checkbox' disabled='disabled' "+
+            "# if (CanBeGM == '1') { #" +
+            " checked='checked' " +
+            "# } # " +
+            " />").Width(100).Sortable(false).Filterable(false);
+        columns.Bound(p => p.IsAdmin).Title("is An Administrator").ClientTemplate(
+                      "<input class='k-widget k-state-disabled' name='IsAdmin' type='checkbox' disabled='disabled' "+
+            "# if (IsAdmin == '1') { #" +
+            " checked='checked' " +
+            "# } # " +
+            " />").Width(125).Sortable(false).Filterable(false);        
+    })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .ServerOperation(false)         
+        .Model( m => {
+            m.Id(p => p.UserId);
+            m.Field(f => f.UserId).Editable(false);
+        })
+        .Events( events => events.Error("usersGridOnError"))
+        .Read(read => read.Action("Read", "Users"))
+        .Create( create => create.Action("Create", "Users"))
+        .Update( update => update.Action("Update", "Users"))
+        .Destroy( destroy => destroy.Action("Destroy", "Users"))
+        .Sort( s => s.Add(sc => sc.Name).Ascending())
+        .PageSize(15)
+    )
+    .Editable( settings => settings.Mode(GridEditMode.PopUp)
+        .DisplayDeleteConfirmation(true)
+        //.TemplateName("UsersEdit")
+        .Window( window => window.Visible(true).Title("Add / Edit User").Width(420).Actions(a => a.Clear()))
+    )
+    .ToolBar(t => {
+            t.Create().Text("");
+    })
+    .Selectable( s => s.Enabled(true))
+    .Pageable( p => p.Refresh(true).PageSizes(true).PageSizes(new int[] {15,25,50}))
+    .Sortable( s => s.SortMode( GridSortMode.SingleColumn))
+    .Filterable(filterable => filterable.Enabled(false))
+    .ColumnMenu(colMenu => colMenu.Enabled(false))
+    .Reorderable( reordering => reordering.Columns(false))
+    .Resizable( r => r.Columns(true))
+    .Scrollable(s => s.Height(400))
+)
+</div>
+
+<script>
+    $(function () {
+        // Notice that the Name() of the tabstrip is used to get its client-side instance
+        usersGrid = $("#usersGrid").data("kendoGrid");
+    });
+</script>

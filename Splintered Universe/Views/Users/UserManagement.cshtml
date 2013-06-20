@@ -1,0 +1,26 @@
+﻿<style>
+    div.k-tabstrip div.k-content {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+</style>
+
+<div>
+@(Html.Kendo().TabStrip()
+    .Name("usersTabstrip")
+    .Items(items =>
+    {
+        if (@Splintered_Universe.Common.UserRights.UserHasRights("isAdmin") == true)
+        {
+            items.Add().Text("Users").LoadContentFrom("Users", "Users");
+        }
+        else
+        {
+            items.Add().Text("Users").Content("Access Denied");
+        }
+    })
+    .SelectedIndex(0) 
+)
+
+</div>

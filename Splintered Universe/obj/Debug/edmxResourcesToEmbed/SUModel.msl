@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SUModelStoreContainer" CdmEntityContainer="SUContext">
+    <EntitySetMapping Name="Characters">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.Character)">
+        <MappingFragment StoreEntitySet="Characters">
+          <ScalarProperty Name="CharacterId" ColumnName="CharacterId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CampaignCampaignId" ColumnName="CampaignCampaignId" />
+          <ScalarProperty Name="UserUserId" ColumnName="UserUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Campaigns">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.Campaign)">
+        <MappingFragment StoreEntitySet="Campaigns">
+          <ScalarProperty Name="CampaignId" ColumnName="CampaignId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="SystemRuleSystemRuleId" ColumnName="SystemRuleSystemRuleId" />
+          <ScalarProperty Name="UserUserId" ColumnName="UserUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CanBeGM" ColumnName="CanBeGM" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemRules">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.SystemRule)">
+        <MappingFragment StoreEntitySet="SystemRules">
+          <ScalarProperty Name="SystemRuleId" ColumnName="SystemRuleId" />
+          <ScalarProperty Name="SystemName" ColumnName="SystemName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemSkills">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.SystemSkill)">
+        <MappingFragment StoreEntitySet="SystemSkills">
+          <ScalarProperty Name="SystemSkillId" ColumnName="SystemSkillId" />
+          <ScalarProperty Name="SystemSkillCategorySystemSkillCategoryId" ColumnName="SystemSkillCategorySystemSkillCategoryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Difficulty" ColumnName="Difficulty" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="GMNotes" ColumnName="GMNotes" />
+          <ScalarProperty Name="SystemStatSystemStatId" ColumnName="SystemStatSystemStatId" />
+          <ScalarProperty Name="SystemActionSystemActionId" ColumnName="SystemActionSystemActionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ELMAH_Error">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.ELMAH_Error)">
+        <MappingFragment StoreEntitySet="ELMAH_Error">
+          <ScalarProperty Name="ErrorId" ColumnName="ErrorId" />
+          <ScalarProperty Name="Application" ColumnName="Application" />
+          <ScalarProperty Name="Host" ColumnName="Host" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="User" ColumnName="User" />
+          <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+          <ScalarProperty Name="TimeUtc" ColumnName="TimeUtc" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="AllXml" ColumnName="AllXml" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemStatLevels">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.SystemStatLevel)">
+        <MappingFragment StoreEntitySet="SystemStatLevels">
+          <ScalarProperty Name="SystemStatLevelId" ColumnName="SystemStatLevelId" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SystemStatSystemStatId" ColumnName="SystemStatSystemStatId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemStats">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.SystemStat)">
+        <MappingFragment StoreEntitySet="SystemStats">
+          <ScalarProperty Name="SystemStatId" ColumnName="SystemStatId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+          <ScalarProperty Name="SystemRuleSystemRuleId" ColumnName="SystemRuleSystemRuleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemSkillCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.SystemSkillCategory)">
+        <MappingFragment StoreEntitySet="SystemSkillCategories">
+          <ScalarProperty Name="SystemSkillCategoryId" ColumnName="SystemSkillCategoryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SystemRuleSystemRuleId" ColumnName="SystemRuleSystemRuleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemActions">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.SystemAction)">
+        <MappingFragment StoreEntitySet="SystemActions">
+          <ScalarProperty Name="SystemActionId" ColumnName="SystemActionId" />
+          <ScalarProperty Name="BaseAPCost" ColumnName="BaseAPCost" />
+          <ScalarProperty Name="MinAPCost" ColumnName="MinAPCost" />
+          <ScalarProperty Name="FatigueCost" ColumnName="FatigueCost" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GMNotes" ColumnName="GMNotes" />
+          <ScalarProperty Name="SystemActionCategorySystemActionCategoryId" ColumnName="SystemActionCategorySystemActionCategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemActionCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.SystemActionCategory)">
+        <MappingFragment StoreEntitySet="SystemActionCategories">
+          <ScalarProperty Name="SystemActionCategoryId" ColumnName="SystemActionCategoryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SystemRuleSystemRuleId" ColumnName="SystemRuleSystemRuleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CombatEncounters">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.CombatEncounter)">
+        <MappingFragment StoreEntitySet="CombatEncounters">
+          <ScalarProperty Name="CombatEncounterId" ColumnName="CombatEncounterId" />
+          <ScalarProperty Name="CampaignCampaignId" ColumnName="CampaignCampaignId" />
+          <ScalarProperty Name="DateStartPlayed" ColumnName="DateStartPlayed" />
+          <ScalarProperty Name="DateEndPlayed" ColumnName="DateEndPlayed" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DateOfEncounter" ColumnName="DateOfEncounter" />
+          <ScalarProperty Name="CurrentAP" ColumnName="CurrentAP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CombatEncounterItems">
+      <EntityTypeMapping TypeName="IsTypeOf(SUModel.CombatEncounterItem)">
+        <MappingFragment StoreEntitySet="CombatEncounterItems">
+          <ScalarProperty Name="CombatEncounterItemId" ColumnName="CombatEncounterItemId" />
+          <ScalarProperty Name="CombatEncounterCombatEncounterId" ColumnName="CombatEncounterCombatEncounterId" />
+          <ScalarProperty Name="StartAp" ColumnName="StartAp" />
+          <ScalarProperty Name="DurationAP" ColumnName="DurationAP" />
+          <ScalarProperty Name="SystemActionSystemActionId" ColumnName="SystemActionSystemActionId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CharacterCharacterId" ColumnName="CharacterCharacterId" />
+          <ScalarProperty Name="CombatantName" ColumnName="CombatantName" />
+          <ScalarProperty Name="Target" ColumnName="Target" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

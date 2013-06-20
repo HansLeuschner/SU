@@ -1,0 +1,475 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SUModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="SUContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Characters" EntityType="SUModel.Character" />
+    <EntitySet Name="Campaigns" EntityType="SUModel.Campaign" />
+    <AssociationSet Name="CampaignCharacter" Association="SUModel.CampaignCharacter">
+      <End Role="Campaign" EntitySet="Campaigns" />
+      <End Role="Character" EntitySet="Characters" />
+    </AssociationSet>
+    <EntitySet Name="Users" EntityType="SUModel.User" />
+    <EntitySet Name="SystemRules" EntityType="SUModel.SystemRule" />
+    <EntitySet Name="SystemSkills" EntityType="SUModel.SystemSkill" />
+    <AssociationSet Name="SystemRulesCampaign" Association="SUModel.SystemRulesCampaign">
+      <End Role="SystemRules" EntitySet="SystemRules" />
+      <End Role="Campaign" EntitySet="Campaigns" />
+    </AssociationSet>
+    <EntitySet Name="ELMAH_Error" EntityType="SUModel.ELMAH_Error" />
+    <FunctionImport Name="ELMAH_GetErrorsXml" ReturnType="Collection(String)">
+      <Parameter Name="Application" Mode="In" Type="String" />
+      <Parameter Name="PageIndex" Mode="In" Type="Int32" />
+      <Parameter Name="PageSize" Mode="In" Type="Int32" />
+      <Parameter Name="TotalCount" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ELMAH_GetErrorXml" ReturnType="Collection(String)">
+      <Parameter Name="Application" Mode="In" Type="String" />
+      <Parameter Name="ErrorId" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="ELMAH_LogError">
+      <Parameter Name="ErrorId" Mode="In" Type="Guid" />
+      <Parameter Name="Application" Mode="In" Type="String" />
+      <Parameter Name="Host" Mode="In" Type="String" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+      <Parameter Name="Source" Mode="In" Type="String" />
+      <Parameter Name="Message" Mode="In" Type="String" />
+      <Parameter Name="User" Mode="In" Type="String" />
+      <Parameter Name="AllXml" Mode="In" Type="String" />
+      <Parameter Name="StatusCode" Mode="In" Type="Int32" />
+      <Parameter Name="TimeUtc" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <AssociationSet Name="UserCharacter" Association="SUModel.UserCharacter">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Character" EntitySet="Characters" />
+    </AssociationSet>
+    <AssociationSet Name="UserCampaign" Association="SUModel.UserCampaign">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Campaign" EntitySet="Campaigns" />
+    </AssociationSet>
+    <EntitySet Name="SystemStatLevels" EntityType="SUModel.SystemStatLevel" />
+    <EntitySet Name="SystemStats" EntityType="SUModel.SystemStat" />
+    <EntitySet Name="SystemSkillCategories" EntityType="SUModel.SystemSkillCategory" />
+    <EntitySet Name="SystemActions" EntityType="SUModel.SystemAction" />
+    <EntitySet Name="SystemActionCategories" EntityType="SUModel.SystemActionCategory" />
+    <EntitySet Name="CombatEncounters" EntityType="SUModel.CombatEncounter" />
+    <AssociationSet Name="CampaignCombatEncounter" Association="SUModel.CampaignCombatEncounter">
+      <End Role="Campaign" EntitySet="Campaigns" />
+      <End Role="CombatEncounter" EntitySet="CombatEncounters" />
+    </AssociationSet>
+    <EntitySet Name="CombatEncounterItems" EntityType="SUModel.CombatEncounterItem" />
+    <AssociationSet Name="SystemActionCombatEncounterItem" Association="SUModel.SystemActionCombatEncounterItem">
+      <End Role="SystemAction" EntitySet="SystemActions" />
+      <End Role="CombatEncounterItem" EntitySet="CombatEncounterItems" />
+    </AssociationSet>
+    <AssociationSet Name="CombatEncounterCombatEncounterItem" Association="SUModel.CombatEncounterCombatEncounterItem">
+      <End Role="CombatEncounter" EntitySet="CombatEncounters" />
+      <End Role="CombatEncounterItem" EntitySet="CombatEncounterItems" />
+    </AssociationSet>
+    <AssociationSet Name="CharacterCombatEncounterItem" Association="SUModel.CharacterCombatEncounterItem">
+      <End Role="Character" EntitySet="Characters" />
+      <End Role="CombatEncounterItem" EntitySet="CombatEncounterItems" />
+    </AssociationSet>
+    <AssociationSet Name="SystemRuleSystemSkillCategory" Association="SUModel.SystemRuleSystemSkillCategory">
+      <End Role="SystemRule" EntitySet="SystemRules" />
+      <End Role="SystemSkillCategory" EntitySet="SystemSkillCategories" />
+    </AssociationSet>
+    <AssociationSet Name="SystemRuleSystemStat" Association="SUModel.SystemRuleSystemStat">
+      <End Role="SystemRule" EntitySet="SystemRules" />
+      <End Role="SystemStat" EntitySet="SystemStats" />
+    </AssociationSet>
+    <AssociationSet Name="SystemRuleSystemActionCategory" Association="SUModel.SystemRuleSystemActionCategory">
+      <End Role="SystemRule" EntitySet="SystemRules" />
+      <End Role="SystemActionCategory" EntitySet="SystemActionCategories" />
+    </AssociationSet>
+    <AssociationSet Name="SystemActionCategorySystemAction" Association="SUModel.SystemActionCategorySystemAction">
+      <End Role="SystemActionCategory" EntitySet="SystemActionCategories" />
+      <End Role="SystemAction" EntitySet="SystemActions" />
+    </AssociationSet>
+    <AssociationSet Name="SystemStatSystemSkill" Association="SUModel.SystemStatSystemSkill">
+      <End Role="SystemStat" EntitySet="SystemStats" />
+      <End Role="SystemSkill" EntitySet="SystemSkills" />
+    </AssociationSet>
+    <AssociationSet Name="SystemSkillCategorySystemSkill" Association="SUModel.SystemSkillCategorySystemSkill">
+      <End Role="SystemSkillCategory" EntitySet="SystemSkillCategories" />
+      <End Role="SystemSkill" EntitySet="SystemSkills" />
+    </AssociationSet>
+    <AssociationSet Name="SystemStatSystemStatLevel" Association="SUModel.SystemStatSystemStatLevel">
+      <End Role="SystemStat" EntitySet="SystemStats" />
+      <End Role="SystemStatLevel" EntitySet="SystemStatLevels" />
+    </AssociationSet>
+    <AssociationSet Name="SystemActionSystemSkill" Association="SUModel.SystemActionSystemSkill">
+      <End Role="SystemAction" EntitySet="SystemActions" />
+      <End Role="SystemSkill" EntitySet="SystemSkills" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Character">
+    <Key>
+      <PropertyRef Name="CharacterId" />
+    </Key>
+    <Property Type="Int32" Name="CharacterId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Campaign" Relationship="SUModel.CampaignCharacter" FromRole="Character" ToRole="Campaign" />
+    <Property Type="Int32" Name="CampaignCampaignId" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="SUModel.UserCharacter" FromRole="Character" ToRole="User" />
+    <Property Type="Int32" Name="UserUserId" Nullable="false" />
+    <NavigationProperty Name="CombatEncounterItems" Relationship="SUModel.CharacterCombatEncounterItem" FromRole="Character" ToRole="CombatEncounterItem" />
+  </EntityType>
+  <EntityType Name="Campaign">
+    <Key>
+      <PropertyRef Name="CampaignId" />
+    </Key>
+    <Property Type="Int32" Name="CampaignId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Characters" Relationship="SUModel.CampaignCharacter" FromRole="Campaign" ToRole="Character" />
+    <Property Type="String" Name="Description" Nullable="false" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="3" />
+    <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="3" />
+    <NavigationProperty Name="SystemRule" Relationship="SUModel.SystemRulesCampaign" FromRole="Campaign" ToRole="SystemRules" />
+    <Property Type="Int32" Name="SystemRuleSystemRuleId" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="SUModel.UserCampaign" FromRole="Campaign" ToRole="User" />
+    <Property Type="Int32" Name="UserUserId" Nullable="false" />
+    <NavigationProperty Name="CombatEncounters" Relationship="SUModel.CampaignCombatEncounter" FromRole="Campaign" ToRole="CombatEncounter" />
+  </EntityType>
+  <Association Name="CampaignCharacter">
+    <End Type="SUModel.Campaign" Role="Campaign" Multiplicity="1" />
+    <End Type="SUModel.Character" Role="Character" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campaign">
+        <PropertyRef Name="CampaignId" />
+      </Principal>
+      <Dependent Role="Character">
+        <PropertyRef Name="CampaignCampaignId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="LoginName" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="Boolean" Name="CanBeGM" Nullable="false" DefaultValue="false" />
+    <Property Type="Boolean" Name="IsAdmin" Nullable="false" DefaultValue="false" />
+    <NavigationProperty Name="Characters" Relationship="SUModel.UserCharacter" FromRole="User" ToRole="Character" />
+    <NavigationProperty Name="Campaigns" Relationship="SUModel.UserCampaign" FromRole="User" ToRole="Campaign" />
+  </EntityType>
+  <EntityType Name="SystemRule">
+    <Key>
+      <PropertyRef Name="SystemRuleId" />
+    </Key>
+    <Property Type="Int32" Name="SystemRuleId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="SystemName" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Campaigns" Relationship="SUModel.SystemRulesCampaign" FromRole="SystemRules" ToRole="Campaign" />
+    <NavigationProperty Name="SystemSkillCategories" Relationship="SUModel.SystemRuleSystemSkillCategory" FromRole="SystemRule" ToRole="SystemSkillCategory" />
+    <NavigationProperty Name="SystemStats" Relationship="SUModel.SystemRuleSystemStat" FromRole="SystemRule" ToRole="SystemStat" />
+    <NavigationProperty Name="SystemActionCategories" Relationship="SUModel.SystemRuleSystemActionCategory" FromRole="SystemRule" ToRole="SystemActionCategory" />
+  </EntityType>
+  <EntityType Name="SystemSkill">
+    <Key>
+      <PropertyRef Name="SystemSkillId" />
+    </Key>
+    <Property Type="Int32" Name="SystemSkillId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="SystemSkillCategorySystemSkillCategoryId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="SUModel.SkillDifficulty" Name="Difficulty" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" />
+    <Property Type="String" Name="GMNotes" Nullable="false" />
+    <NavigationProperty Name="SystemStat" Relationship="SUModel.SystemStatSystemSkill" FromRole="SystemSkill" ToRole="SystemStat" />
+    <Property Type="Int32" Name="SystemStatSystemStatId" Nullable="false" />
+    <NavigationProperty Name="SystemSkillCategory" Relationship="SUModel.SystemSkillCategorySystemSkill" FromRole="SystemSkill" ToRole="SystemSkillCategory" />
+    <NavigationProperty Name="SystemAction" Relationship="SUModel.SystemActionSystemSkill" FromRole="SystemSkill" ToRole="SystemAction" />
+    <Property Type="Int32" Name="SystemActionSystemActionId" Nullable="false" />
+  </EntityType>
+  <Association Name="SystemRulesCampaign">
+    <End Type="SUModel.SystemRule" Role="SystemRules" Multiplicity="1" />
+    <End Type="SUModel.Campaign" Role="Campaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemRules">
+        <PropertyRef Name="SystemRuleId" />
+      </Principal>
+      <Dependent Role="Campaign">
+        <PropertyRef Name="SystemRuleSystemRuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ELMAH_Error">
+    <Key>
+      <PropertyRef Name="ErrorId" />
+    </Key>
+    <Property Type="Guid" Name="ErrorId" Nullable="false" />
+    <Property Type="String" Name="Application" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Host" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Type" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Source" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Message" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="User" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="StatusCode" Nullable="false" />
+    <Property Type="DateTime" Name="TimeUtc" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="Sequence" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="AllXml" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="UserCharacter">
+    <End Type="SUModel.User" Role="User" Multiplicity="1" />
+    <End Type="SUModel.Character" Role="Character" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Character">
+        <PropertyRef Name="UserUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserCampaign">
+    <End Type="SUModel.User" Role="User" Multiplicity="1" />
+    <End Type="SUModel.Campaign" Role="Campaign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Campaign">
+        <PropertyRef Name="UserUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SystemStatLevel">
+    <Key>
+      <PropertyRef Name="SystemStatLevelId" />
+    </Key>
+    <Property Type="Int32" Name="SystemStatLevelId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="Level" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" />
+    <NavigationProperty Name="SystemStat" Relationship="SUModel.SystemStatSystemStatLevel" FromRole="SystemStatLevel" ToRole="SystemStat" />
+    <Property Type="Int32" Name="SystemStatSystemStatId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SystemStat">
+    <Key>
+      <PropertyRef Name="SystemStatId" />
+    </Key>
+    <Property Type="Int32" Name="SystemStatId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="String" Name="Abbreviation" Nullable="false" />
+    <NavigationProperty Name="SystemRule" Relationship="SUModel.SystemRuleSystemStat" FromRole="SystemStat" ToRole="SystemRule" />
+    <Property Type="Int32" Name="SystemRuleSystemRuleId" Nullable="false" />
+    <NavigationProperty Name="SystemSkills" Relationship="SUModel.SystemStatSystemSkill" FromRole="SystemStat" ToRole="SystemSkill" />
+    <NavigationProperty Name="SystemStatLevels" Relationship="SUModel.SystemStatSystemStatLevel" FromRole="SystemStat" ToRole="SystemStatLevel" />
+  </EntityType>
+  <EnumType Name="SkillDifficulty">
+    <Member Name="Easy" />
+    <Member Name="Medium" />
+    <Member Name="Hard" />
+  </EnumType>
+  <EntityType Name="SystemSkillCategory">
+    <Key>
+      <PropertyRef Name="SystemSkillCategoryId" />
+    </Key>
+    <Property Type="Int32" Name="SystemSkillCategoryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <NavigationProperty Name="SystemRule" Relationship="SUModel.SystemRuleSystemSkillCategory" FromRole="SystemSkillCategory" ToRole="SystemRule" />
+    <Property Type="Int32" Name="SystemRuleSystemRuleId" Nullable="false" />
+    <NavigationProperty Name="SystemSkills" Relationship="SUModel.SystemSkillCategorySystemSkill" FromRole="SystemSkillCategory" ToRole="SystemSkill" />
+  </EntityType>
+  <EntityType Name="SystemAction">
+    <Key>
+      <PropertyRef Name="SystemActionId" />
+    </Key>
+    <Property Type="Int32" Name="SystemActionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="BaseAPCost" Nullable="false" />
+    <Property Type="Int32" Name="MinAPCost" Nullable="false" />
+    <Property Type="Int32" Name="FatigueCost" Nullable="false" />
+    <NavigationProperty Name="CombatEncounterItems" Relationship="SUModel.SystemActionCombatEncounterItem" FromRole="SystemAction" ToRole="CombatEncounterItem" />
+    <Property Type="String" Name="Description" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="String" Name="GMNotes" Nullable="false" />
+    <NavigationProperty Name="SystemActionCategory" Relationship="SUModel.SystemActionCategorySystemAction" FromRole="SystemAction" ToRole="SystemActionCategory" />
+    <Property Type="Int32" Name="SystemActionCategorySystemActionCategoryId" Nullable="false" />
+    <NavigationProperty Name="SystemSkills" Relationship="SUModel.SystemActionSystemSkill" FromRole="SystemAction" ToRole="SystemSkill" />
+  </EntityType>
+  <EntityType Name="SystemActionCategory">
+    <Key>
+      <PropertyRef Name="SystemActionCategoryId" />
+    </Key>
+    <Property Type="Int32" Name="SystemActionCategoryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <NavigationProperty Name="SystemRule" Relationship="SUModel.SystemRuleSystemActionCategory" FromRole="SystemActionCategory" ToRole="SystemRule" />
+    <Property Type="Int32" Name="SystemRuleSystemRuleId" Nullable="false" />
+    <NavigationProperty Name="SystemActions" Relationship="SUModel.SystemActionCategorySystemAction" FromRole="SystemActionCategory" ToRole="SystemAction" />
+  </EntityType>
+  <EntityType Name="CombatEncounter">
+    <Key>
+      <PropertyRef Name="CombatEncounterId" />
+    </Key>
+    <Property Type="Int32" Name="CombatEncounterId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Campaign" Relationship="SUModel.CampaignCombatEncounter" FromRole="CombatEncounter" ToRole="Campaign" />
+    <Property Type="Int32" Name="CampaignCampaignId" Nullable="false" />
+    <Property Type="DateTime" Name="DateStartPlayed" Nullable="false" />
+    <Property Type="String" Name="DateEndPlayed" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" />
+    <Property Type="DateTime" Name="DateOfEncounter" Nullable="true" />
+    <NavigationProperty Name="CombatEncounterItems" Relationship="SUModel.CombatEncounterCombatEncounterItem" FromRole="CombatEncounter" ToRole="CombatEncounterItem" />
+    <Property Type="String" Name="CurrentAP" Nullable="false" />
+  </EntityType>
+  <Association Name="CampaignCombatEncounter">
+    <End Type="SUModel.Campaign" Role="Campaign" Multiplicity="1" />
+    <End Type="SUModel.CombatEncounter" Role="CombatEncounter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campaign">
+        <PropertyRef Name="CampaignId" />
+      </Principal>
+      <Dependent Role="CombatEncounter">
+        <PropertyRef Name="CampaignCampaignId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CombatEncounterItem">
+    <Key>
+      <PropertyRef Name="CombatEncounterItemId" />
+    </Key>
+    <Property Type="Int32" Name="CombatEncounterItemId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CombatEncounterCombatEncounterId" Nullable="false" />
+    <Property Type="String" Name="StartAp" Nullable="false" />
+    <Property Type="String" Name="DurationAP" Nullable="false" />
+    <NavigationProperty Name="SystemAction" Relationship="SUModel.SystemActionCombatEncounterItem" FromRole="CombatEncounterItem" ToRole="SystemAction" />
+    <Property Type="Int32" Name="SystemActionSystemActionId" Nullable="false" />
+    <NavigationProperty Name="CombatEncounter" Relationship="SUModel.CombatEncounterCombatEncounterItem" FromRole="CombatEncounterItem" ToRole="CombatEncounter" />
+    <NavigationProperty Name="Character" Relationship="SUModel.CharacterCombatEncounterItem" FromRole="CombatEncounterItem" ToRole="Character" />
+    <Property Type="String" Name="Description" Nullable="false" />
+    <Property Type="Int32" Name="CharacterCharacterId" Nullable="true" />
+    <Property Type="String" Name="CombatantName" Nullable="false" />
+    <Property Type="String" Name="Target" Nullable="false" />
+  </EntityType>
+  <Association Name="SystemActionCombatEncounterItem">
+    <End Type="SUModel.SystemAction" Role="SystemAction" Multiplicity="1" />
+    <End Type="SUModel.CombatEncounterItem" Role="CombatEncounterItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemAction">
+        <PropertyRef Name="SystemActionId" />
+      </Principal>
+      <Dependent Role="CombatEncounterItem">
+        <PropertyRef Name="SystemActionSystemActionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CombatEncounterCombatEncounterItem">
+    <End Type="SUModel.CombatEncounter" Role="CombatEncounter" Multiplicity="1" />
+    <End Type="SUModel.CombatEncounterItem" Role="CombatEncounterItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CombatEncounter">
+        <PropertyRef Name="CombatEncounterId" />
+      </Principal>
+      <Dependent Role="CombatEncounterItem">
+        <PropertyRef Name="CombatEncounterCombatEncounterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CharacterCombatEncounterItem">
+    <End Type="SUModel.Character" Role="Character" Multiplicity="0..1" />
+    <End Type="SUModel.CombatEncounterItem" Role="CombatEncounterItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Character">
+        <PropertyRef Name="CharacterId" />
+      </Principal>
+      <Dependent Role="CombatEncounterItem">
+        <PropertyRef Name="CharacterCharacterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SystemRuleSystemSkillCategory">
+    <End Type="SUModel.SystemRule" Role="SystemRule" Multiplicity="1" />
+    <End Type="SUModel.SystemSkillCategory" Role="SystemSkillCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemRule">
+        <PropertyRef Name="SystemRuleId" />
+      </Principal>
+      <Dependent Role="SystemSkillCategory">
+        <PropertyRef Name="SystemRuleSystemRuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SystemRuleSystemStat">
+    <End Type="SUModel.SystemRule" Role="SystemRule" Multiplicity="1" />
+    <End Type="SUModel.SystemStat" Role="SystemStat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemRule">
+        <PropertyRef Name="SystemRuleId" />
+      </Principal>
+      <Dependent Role="SystemStat">
+        <PropertyRef Name="SystemRuleSystemRuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SystemRuleSystemActionCategory">
+    <End Type="SUModel.SystemRule" Role="SystemRule" Multiplicity="1" />
+    <End Type="SUModel.SystemActionCategory" Role="SystemActionCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemRule">
+        <PropertyRef Name="SystemRuleId" />
+      </Principal>
+      <Dependent Role="SystemActionCategory">
+        <PropertyRef Name="SystemRuleSystemRuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SystemActionCategorySystemAction">
+    <End Type="SUModel.SystemActionCategory" Role="SystemActionCategory" Multiplicity="1" />
+    <End Type="SUModel.SystemAction" Role="SystemAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemActionCategory">
+        <PropertyRef Name="SystemActionCategoryId" />
+      </Principal>
+      <Dependent Role="SystemAction">
+        <PropertyRef Name="SystemActionCategorySystemActionCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SystemStatSystemSkill">
+    <End Type="SUModel.SystemStat" Role="SystemStat" Multiplicity="1" />
+    <End Type="SUModel.SystemSkill" Role="SystemSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemStat">
+        <PropertyRef Name="SystemStatId" />
+      </Principal>
+      <Dependent Role="SystemSkill">
+        <PropertyRef Name="SystemStatSystemStatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SystemSkillCategorySystemSkill">
+    <End Type="SUModel.SystemSkillCategory" Role="SystemSkillCategory" Multiplicity="1" />
+    <End Type="SUModel.SystemSkill" Role="SystemSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemSkillCategory">
+        <PropertyRef Name="SystemSkillCategoryId" />
+      </Principal>
+      <Dependent Role="SystemSkill">
+        <PropertyRef Name="SystemSkillCategorySystemSkillCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SystemStatSystemStatLevel">
+    <End Type="SUModel.SystemStat" Role="SystemStat" Multiplicity="1" />
+    <End Type="SUModel.SystemStatLevel" Role="SystemStatLevel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemStat">
+        <PropertyRef Name="SystemStatId" />
+      </Principal>
+      <Dependent Role="SystemStatLevel">
+        <PropertyRef Name="SystemStatSystemStatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SystemActionSystemSkill">
+    <End Type="SUModel.SystemAction" Role="SystemAction" Multiplicity="1" />
+    <End Type="SUModel.SystemSkill" Role="SystemSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemAction">
+        <PropertyRef Name="SystemActionId" />
+      </Principal>
+      <Dependent Role="SystemSkill">
+        <PropertyRef Name="SystemActionSystemActionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
